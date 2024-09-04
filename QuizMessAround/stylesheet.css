@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'MetropolisRegular';
-    src: url('fonts\Metropolis-Regular.eot');
-    src: url('fonts\Metropolis-Regular.eot?iefix') format('embedded-opentype'),
-    url('fonts\Metropolis-Regular.ttf') format('truetype'),
-    url('fonts\Metropolis-Regular.woff') format('woff');
+    src: url('fonts/Metropolis-Regular.eot');
+    src: url('fonts/Metropolis-Regular.eot?iefix') format('embedded-opentype'),
+    url('fonts/Metropolis-Regular.ttf') format('truetype'),
+    url('fonts/Metropolis-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -55,8 +55,10 @@ body.wrong {
 
 .btn-grid {
     display: grid;
-    gap: 10px;
+    gap: 15px;
     margin: 20px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .btn {
@@ -64,9 +66,9 @@ body.wrong {
     border: 1px solid hsl(var(--hue), 100%, 40%);
     border-radius: 5px;
     background-color: hsl(var(--hue), 100%, 50%);
-    padding: 10px, 10px;
     color: white;
     outline: none;
+    height: 40px;
 }
 
 .btn:hover {

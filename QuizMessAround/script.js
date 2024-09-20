@@ -1,3 +1,13 @@
+
+let questions;
+
+(async function() {
+    await fetchData();
+
+    console.log("You can now use these questions:", questions);
+    console.log(typeof questions)
+})();
+
 // Select DOM elements for the start button, next button, and quiz container
 const startButton = document.getElementById('start-btn');
 const nextButton = document.getElementById('next-btn');
@@ -10,23 +20,40 @@ let questionsShuffled, currentQuestionIndex;
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-btns');
 
+async function fetchData() {
+    try {
+        const response = await fetch("http://127.0.0.1:5000/get-questions");
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        questions = await response.json();
+        questions = questions.questions
+        console.log("Questions set:", questions);
+    } catch(error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
 // Add event listeners to the start and next buttons
 startButton.addEventListener('click', startQuiz);
+
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++; // Move to the next question
     setNextQuestion(); // Load the next question
 });
 
+
 // Function to start the quiz
-function startQuiz() {
-    // Uncomment the next line for debugging purposes
-    // console.log('Quiz started');
-    startButton.classList.add('hide'); // Hide the start button
-    questionsShuffled = questions.sort(() => Math.random() - 0.5); // Shuffle questions
-    currentQuestionIndex = 0; // Reset question index
-    quizContainer.classList.remove('hide'); // Show the question container
-    setNextQuestion(); // Load the first question
-}
+function startQuiz(){
+    //console.log('Quiz started')
+    startButton.classList.add('hide')
+    questionsShuffled = questions.sort(() => Math.random() - 0.5)
+    questionsShuffled.forEach(question => {
+        question.answers = question.answers.sort(() => Math.random() - 0.5)
+    })
+    currentQuestionIndex = 0
+    quizContainer.classList.remove('hide')
+    setNextQuestion()
 
 // Function to load the next question
 function setNextQuestion() {
@@ -98,70 +125,3 @@ function getRandomInt(min, max) {
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // Return a random integer
 }
-
-// Array of questions for the quiz
-const questions = [
-    {
-        question: "When was Restaurant Opened?",
-        answers: [
-            { text: 'correct year', correct: true },
-            { text: getRandomInt(1973, 2024), correct: false },
-            { text: getRandomInt(1973, 2024), correct: false },
-            { text: getRandomInt(1973, 2024), correct: false }
-        ]
-    },
-    {
-        question: "What is Restaurant's main cuisine style?",
-        answers: [
-            { text: 'Italian', correct: false },
-            { text: 'Greek', correct: false },
-            { text: 'correct Answer', correct: true },
-            { text: 'Asian Fusion', correct: false }
-        ]
-    },
-    {
-        question: "Which is a dish from our menu?",
-        answers: [
-            { text: 'Chicken Parmigiana', correct: false },
-            { text: 'correct Answer', correct: true },
-            { text: 'Fettuccini Gamberi', correct: false },
-            { text: 'Combination Seafood Chow Mein', correct: false }
-        ]
-    },
-    {
-        question: "How many vegetarian options do we offer on our menu?",
-        answers: [
-            { text: getRandomInt(1, 10), correct: false },
-            { text: getRandomInt(1, 10), correct: false },
-            { text: 'correct Answer', correct: true },
-            { text: getRandomInt(1, 10), correct: false }
-        ]
-    },
-    {
-        question: "Which of the following is one of our dessert specialties?",
-        answers: [
-            { text: 'Tiramisu', correct: false },
-            { text: 'correct Answer', correct: true },
-            { text: 'Chocolate Lava Cake', correct: false },
-            { text: 'Crème Brûlée', correct: false }
-        ]
-    },
-    {
-        question: "Which of the following dietary preferences does Restaurant cater to?",
-        answers: [
-            { text: 'Gluten-free', correct: false },
-            { text: 'Vegan', correct: false },
-            { text: 'correct Answer', correct: true },
-            { text: 'All of the above', correct: false }
-        ]
-    },
-    {
-        question: "Which suburb is Restaurant located in?",
-        answers: [
-            { text: 'correct Suburb', correct: true },
-            { text: 'Suburb 1', correct: false },
-            { text: 'Suburb 2', correct: false },
-            { text: 'Suburb 3', correct: false }
-        ]
-    }
-];

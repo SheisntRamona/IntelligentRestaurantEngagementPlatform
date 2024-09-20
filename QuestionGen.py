@@ -1,3 +1,7 @@
+from flask import Flask, request, jsonify, make_response, render_template
+from flask_cors import CORS
+from config import app
+import json
 import requests
 import time
 import os
@@ -74,7 +78,7 @@ class FactPromptGenerator:
             {self.text}
         """
         return prompt
-
+    
 class QuestionPromptGenerator:
     def __init__(self, facts, no_questions):
         self.facts = facts
@@ -85,6 +89,17 @@ class QuestionPromptGenerator:
             The other answers should be similar but slightly different from the correct answer to
             mislead a person trying to complete the quiz.
             These questions should be engaging for a customer of the restaurant to answer.
+            Please generate the questions in the following JSON format:
+
+            {
+                "question": "<insert question>",
+                "answers": [
+                    {"text": "<answer 1>", "correct": <bool>},
+                    {"text": "<answer 2>", "correct": <bool>},
+                    {"text": "<answer 3>", "correct": <bool>},
+                    {"text": "<answer 4>", "correct": <bool>},
+                ]
+            }
         """
     def GeneratePrompt(self):
         prompt = f"""
@@ -108,7 +123,7 @@ class QuestionPromptGenerator:
         """
         return prompt
     
-def ProcessPrompt(promptGen):
+def ProcessPrompt(promptGen, format={"type": "text"}):
     completion = client.chat.completions.create(
         model = "gpt-4o-mini",
         messages = [
@@ -116,20 +131,28 @@ def ProcessPrompt(promptGen):
             {"role": "user", "content": promptGen.GeneratePrompt()}
         ],
         temperature = 0.3,
-        max_tokens = 500,
+        max_tokens = 2048,
+        response_format = format
     )
     return completion.choices[0].message.content
 
-startUrl = "https://www.thaikorner.com.au"
-#startUrl = "https://www.pacificpinestavern.com.au/"
-baseUrl = startUrl
-text = CrawlWebsite(startUrl, baseUrl)
-print(text)
+def generateQuestions():
+    startUrl = input("Enter your restaurant's url: ")
+    baseUrl = startUrl
+    text = CrawlWebsite(startUrl, baseUrl)
 
-promptGen = FactPromptGenerator(text, 10)
-facts = ProcessPrompt(promptGen)
-print(facts)
+    promptGen = FactPromptGenerator(text, 10)
+    facts = ProcessPrompt(promptGen)
 
-promptGen = QuestionPromptGenerator(facts, 5)
-questions = ProcessPrompt(promptGen)
-print(questions)
+    promptGen = QuestionPromptGenerator(facts, 5)
+    questions = ProcessPrompt(promptGen, {"type": "json_object"})
+    return json.loads(questions)
+
+@app.route("/get-questions")
+def get_questions():
+    return jsonify(questions)
+
+questions = generateQuestions()
+
+if __name__ == "__main__":
+    app.run(debug=True, use_reloader=False)

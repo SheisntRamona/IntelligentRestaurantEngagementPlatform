@@ -1,7 +1,7 @@
 let questions;
 
 (async function() {
-    await fetchData();
+    await fetchData("ThaiKorner");
 
     console.log("You can now use these questions:", questions);
     console.log(typeof questions)
@@ -19,9 +19,9 @@ let questionsShuffled, currentQuestionIndex
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-btns')
 
-async function fetchData() {
+async function fetchData(restaurant_name) {
     try {
-        const response = await fetch("http://127.0.0.1:5000/get-questions");
+        const response = await fetch(`http://127.0.0.1:5000/get-questions/${restaurant_name}`);
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }

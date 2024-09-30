@@ -1,116 +1,104 @@
-/* Define a custom font face named 'MetropolisRegular' */
 @font-face {
-    font-family: 'MetropolisRegular'; /* Name of the font family */
-    src: url('fonts/Metropolis-Regular.eot'); /* URL to the EOT font file (for older IE browsers) */
-    src: url('fonts/Metropolis-Regular.eot?iefix') format('embedded-opentype'), /* URL to the EOT file with IEFix format */
-         url('fonts/Metropolis-Regular.ttf') format('truetype'), /* URL to the TTF font file */
-         url('fonts/Metropolis-Regular.woff') format('woff'); /* URL to the WOFF font file */
-    font-weight: normal; /* Normal font weight */
-    font-style: normal; /* Normal font style */
+    font-family: 'MetropolisRegular';
+    src: url('fonts/Metropolis-Regular.eot');
+    src: url('fonts/Metropolis-Regular.eot?iefix') format('embedded-opentype'),
+    url('fonts/Metropolis-Regular.ttf') format('truetype'),
+    url('fonts/Metropolis-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-/* Apply box-sizing and font-family to all elements and pseudo-elements */
 *, *::before, *::after {
-    box-sizing: border-box; /* Ensure padding and border are included in the element’s total width and height */
-    font-family: MetropolisRegular; /* Use the custom 'MetropolisRegular' font for all elements */
+    box-sizing:border-box;
+    font-family: MetropolisRegular;
 }
 
-/* Define custom properties (CSS variables) for color hues */
 :root {
-    --hue-neutral: 200; /* Neutral hue for general use */
-    --hue-wrong: 0; /* Hue for wrong answers (red) */
-    --hue-correct: 145; /* Hue for correct answers (green) */
+    --hue-neutral: 200;
+    --hue-wrong: 0;
+    --hue-correct: 145;
 }
 
-/* Styling for the body element */
 body {
-    --hue: var(--hue-neutral); /* Default hue for body background color */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for layout */
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    background-color: hsl(var(--hue), 100%, 20%); /* Background color based on hue variable */
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 100%, 20%);
 }
 
-/* Apply a different hue to the body when the answer is correct */
 body.correct {
-    --hue: var(--hue-correct); /* Use the hue for correct answers */
+    --hue: var(--hue-correct);
 }
 
-/* Apply a different hue to the body when the answer is incorrect */
 body.wrong {
-    --hue: var(--hue-wrong); /* Use the hue for wrong answers */
+    --hue: var(--hue-wrong);
 }
 
-/* Container styling for the quiz content */
 .container {
-    font-family: MetropolisRegular; /* Use the custom font family */
-    width: 800px; /* Fixed width for the container */
-    max-width: 50%; /* Maximum width to ensure responsiveness */
+    font-family: MetropolisRegular;
+    width: 800px;
+    max-width: 50%;
     /*height: 800px;
-    max-height: 50%;*/ /* Optional height settings, commented out */
-    background-color: white; /* Background color of the container */
-    border-radius: 5px; /* Rounded corners for the container */
-    padding: 10px; /* Padding inside the container */
-    box-shadow: 0 0 10px 2px; /* Shadow effect around the container */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
+    max-height: 50%;*/
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Grid layout for the answer buttons */
+.link-container {
+    text-align: center;
+}
+
 .btn-grid {
-    display: grid; /* Use grid layout for buttons */
-    gap: 15px; /* Space between grid items */
-    margin: 20px 0; /* Vertical margin around the grid */
-    padding-top: 10px; /* Padding at the top of the grid */
-    padding-bottom: 10px; /* Padding at the bottom of the grid */
+    display: grid;
+    gap: 15px;
+    margin: 20px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-/* Base styling for buttons */
 .btn {
-    --hue: var(--hue-neutral); /* Default hue for button background color */
-    border: 1px solid hsl(var(--hue), 100%, 40%); /* Border color based on hue */
-    border-radius: 5px; /* Rounded corners for buttons */
-    background-color: hsl(var(--hue), 100%, 50%); /* Background color based on hue */
-    color: white; /* Text color */
-    outline: none; /* Remove default button outline */
-    height: 40px; /* Fixed height for buttons */
+    --hue: var(--hue-neutral);
+    border: 1px solid hsl(var(--hue), 100%, 40%);
+    border-radius: 5px;
+    background-color: hsl(var(--hue), 100%, 50%);
+    color: white;
+    outline: none;
+    height: 40px;
 }
 
-/* Styling for buttons on hover */
 .btn:hover {
-    border-color: black; /* Change border color to black when hovering */
+    border-color: black;
 }
 
-/* Styling for buttons with the 'correct' class */
 .btn.correct {
-    --hue: var(--hue-correct); /* Use the hue for correct answers */
-    color: black; /* Text color for correct buttons */
+    --hue: var(--hue-correct);
+    color: black;
 }
-
-/* Styling for buttons with the 'wrong' class */
 .btn.wrong {
-    --hue: var(--hue-wrong); /* Use the hue for wrong answers */
+    --hue: var(--hue-wrong);
 }
 
-/* Styling for start and next buttons */
 .strt-btn, .next-btn {
-    font-size: 1.5rem; /* Font size for buttons */
-    font-weight: bold; /* Bold font weight */
-    padding: 10px 20px; /* Padding inside the buttons */
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
 }
 
-/* Container for control buttons */
 .controls {
-    display: flex; /* Use flexbox layout */
-    justify-content: center; /* Center control buttons horizontally */
-    align-items: center; /* Center control buttons vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Hide elements with this class */
 .hide {
-    display: none; /* Hide element from view */
+    display: none;
 }

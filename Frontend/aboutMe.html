@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Restaurant: About Us</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="stylesheet.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <section class="about-me">
+            <h1>About <span id="restaurantName"></span></h1>
+            <p>Welcome to our restaurant! We are passionate about providing our customers with a delightful culinary experience. Our story began with a love for food and a commitment to offering the best dishes from local ingredients. We hope you enjoy your visit!</p>
+        </section>
+        
+        <button class="btn quiz-btn" onclick="startQuiz()">Take the Quiz!</button>
+    </div>
+
+    <script>
+        // Function to get the query parameter (restaurantName) from the URL
+        function getRestaurantNameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('restaurantName');
+        }
+
+        // Set the restaurantName dynamically
+        document.addEventListener("DOMContentLoaded", () => {
+            const restaurantName = decodeURIComponent(getRestaurantNameFromURL());
+            if (restaurantName) {
+                document.getElementById("restaurantName").textContent = restaurantName;
+            } else {
+                document.getElementById("restaurantName").textContent = "Unknown Restaurant";
+            }
+        });
+
+        // Function to start the quiz by generating questions and redirecting to quiz.html
+        function startQuiz() {
+            const restaurantName = decodeURIComponent(getRestaurantNameFromURL());
+            if (!restaurantName) {
+                alert('Restaurant name not found');
+                return;
+            }
+
+            // Fetch and generate questions for the restaurant
+            fetch(`/generate-questions?restaurantName=${encodeURIComponent(restaurantName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Quiz questions generated:', data);
+                    // Redirect to the quiz page with the restaurant name as query parameter
+                    window.location.href = `quiz.html?restaurantName=${encodeURIComponent(restaurantName)}`;
+                })
+                .catch(error => {
+                    console.error('Error generating quiz questions:', error);
+                    alert('Failed to generate quiz questions.');
+                });
+        }
+    </script>
+</body>
+</html>

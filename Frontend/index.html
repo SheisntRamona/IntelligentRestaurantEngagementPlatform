@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>Restaurant Engagement Quiz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Link to external stylesheet -->
-  <link href="stylesheet.css" rel="stylesheet">
-  <!-- Link to external JavaScript file with defer attribute to load after HTML is parsed -->
-  <script defer src="script.js"></script>
+    <title>Restaurant Website Link</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="stylesheet.css" rel="stylesheet">
 </head>
-
 <body>
-    <div class="container">
-        <!-- Container for the quiz question and answers -->
-        <div id="question-container" class="hide">
-            <!-- Element to display the current quiz question -->
-            <div id="question">Question</div>
-            <div id="answer-btns" class="btn-grid">
-                <!-- Buttons for the possible answers -->
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
-            </div>
+    <div class = "container">
+        <div class="link-container">
+            <label for="websiteLink">Enter Website Link:</label>
+            <input type="text" id="websiteLink" placeholder="Enter the restaurant website URL">
+            <button class="btn" onclick="submitLink()">Submit</button>
         </div>
-        <!-- Container for control buttons -->
-        <div class="controls">
-            <!-- Button to start the quiz -->
-            <button id="start-btn" class="start-btn btn">Start</button>
-            <!-- Button to proceed to the next question, initially hidden -->
-            <button id="next-btn" class="next-btn btn hide">Next</button>
-        </div>
+
+        <script>
+            function extractRestaurantName(url) {
+                try {
+                    // Extract the hostname from the URL and return it as the restaurant name
+                    const hostname = new URL(url).hostname;
+                    return hostname.replace('www.', '').split('.')[0];  // Get the base domain name
+                } catch (error) {
+                    console.error('Invalid URL', error);
+                    return null;
+                }
+            }
+
+            function submitLink() {
+                const websiteLink = document.getElementById("websiteLink").value;
+                const restaurantName = extractRestaurantName(websiteLink);
+
+                if (!restaurantName) {
+                    alert('Please enter a valid URL');
+                    return;
+                }
+
+                // Redirect to aboutMe.html and pass the restaurant name in the URL
+                window.location.href = `aboutMe.html?restaurantName=${encodeURIComponent(restaurantName)}`;
+            }
+        </script>
     </div>
 </body>
-
 </html>

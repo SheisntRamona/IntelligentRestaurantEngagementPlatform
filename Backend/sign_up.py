@@ -10,6 +10,7 @@ from urllib.parse import urljoin, urlparse
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
 
+# Load the OpenAI API key
 _ = load_dotenv(find_dotenv())
 client = OpenAI(
     api_key = os.environ.get('OPENAI_API_KEY'),
@@ -61,6 +62,7 @@ def CrawlWebsite(url, baseUrl, visitedLinks=None, websiteText='', maxDepth=1, cu
     return websiteText
 
 class FactPromptGenerator:
+    ### Class to generate fact prompt to pass to OpenAI
     def __init__(self, text, no_facts):
         self.text = text
         self.no_facts = no_facts
@@ -91,7 +93,6 @@ class FactPromptGenerator:
             Offers a spacious bistro known for delicious food, quality service, and comfortable seating. 
             More fact"
         """
-        #The facts should also be quite short, they must be less than 7 words long each.
     def GeneratePrompt(self):
         prompt = f"""
             I am seeking your expertise in distilling key information about text.
@@ -105,12 +106,14 @@ class FactPromptGenerator:
         return prompt
     
 def ProcessPrompt(promptGen, format={"type": "text"}):
+    # Function to process any prompt using gpt-4o-mini
     completion = client.chat.completions.create(
         model = "gpt-4o-mini",
         messages = [
             {"role": "system", "content": promptGen.system_message},
             {"role": "user", "content": promptGen.GeneratePrompt()}
         ],
+        # Keep the model to be fairly deterministic
         temperature = 0.3,
         max_tokens = 2048,
         response_format = format

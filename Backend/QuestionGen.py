@@ -13,12 +13,14 @@ from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
 from sqlalchemy import func
 
+# Load the OpenAI API key
 _ = load_dotenv(find_dotenv())
 client = OpenAI(
     api_key = os.environ.get('OPENAI_API_KEY'),
 )
     
 class QuestionPromptGenerator:
+    ### Class to generate question generation prompt to pass to OpenAI
     def __init__(self, facts, no_questions):
         self.facts = facts
         self.no_questions = no_questions
@@ -64,6 +66,7 @@ class QuestionPromptGenerator:
 
 @app.route("/get-questions/<string:restaurant_name>", methods=["GET"])
 def get_questions(restaurant_name):
+    # App route to generate the questions
     normalized_name = restaurant_name.replace(" ", "").lower()
 
     fact_list = FactList.query.filter(
@@ -84,6 +87,7 @@ def get_questions(restaurant_name):
 
 @app.route("/get_fact_list/<string:restaurant_name>", methods=["GET"])
 def get_fact_list(restaurant_name):
+    # app route to get fact list from the database (for testing)
     fact_list = FactList.query.filter_by(restaurant_name=restaurant_name).one_or_none()
 
     if not fact_list:

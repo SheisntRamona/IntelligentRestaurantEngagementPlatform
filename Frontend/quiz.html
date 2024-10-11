@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <title>Restaurant Engagement Quiz</title>
@@ -10,10 +8,17 @@
   <link href="stylesheet.css" rel="stylesheet">
   <script defer src="script.js"></script>
 </head>
-
 <body>
-    <div class ="container">
-        <div id="question-container" class ="hide">
+    <div class="container">
+        <!-- Restaurant name input form -->
+        <div id="restaurant-form">
+            <label for="restaurant-name">Enter Restaurant Name:</label>
+            <input type="text" id="restaurant-name" placeholder="Enter the name of the restaurant">
+            <button id="submit-btn" class="btn">Submit</button>
+        </div>
+        
+        <!-- Quiz section (hidden initially) -->
+        <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-btns" class="btn-grid">
                 <button class="btn">Answer 1</button>
@@ -22,11 +27,12 @@
                 <button class="btn">Answer 4</button>
             </div>
         </div>
+        
+        <!-- Controls -->
         <div class="controls">
-            <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="start-btn" class="start-btn btn hide">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
     </div>
 </body>
-
 </html>

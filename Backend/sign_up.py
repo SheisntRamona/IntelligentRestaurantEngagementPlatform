@@ -65,35 +65,42 @@ class FactPromptGenerator:
         self.text = text
         self.no_facts = no_facts
         self.system_message = """
-            You are tasked with generating a list of facts from text.
+            You are tasked with generating a list of facts from a lump of text about a restaurant.
             These facts must be truthful and accurate and reflect the information given in the text.
+            These facts must also be interesting and unique for a person viewing them and should be styled such
+            that they start with "Did you know? blah blah blah".
+            Additionally, you must also list the restaurant's name by finding it in the text.
 
             -------------------------------
 
-            The name and facts need to be in the following format:
+            The name and facts need to be in the following format shown inside the double quotes below:
 
-            Restaurant Name
+            "Restaurant Name
             Fact
             Fact
             ...
-            Fact
+            Fact"
 
-            Below is an example of this
+            -------------------------------
 
-            Pacific Pines Tavern
-            Random fact about pacific pines tavern blah blah 
-            Another random fact
-            a third random fact
-            More fact
+            Below is an example of this format shown inside the double quotes
+
+            "Pacific Pines Tavern
+            Located in Pacific Pines, QLD, overlooking Central Park.
+            Family-friendly hotel with a motto that good food should be shared with good people.
+            Offers a spacious bistro known for delicious food, quality service, and comfortable seating. 
+            More fact"
         """
         #The facts should also be quite short, they must be less than 7 words long each.
     def GeneratePrompt(self):
         prompt = f"""
             I am seeking your expertise in distilling key information about text.
             Below I have given text that I have extracted from a certain restaurants website,
-            could you please list {self.no_facts} facts about this restaurant.
+            could you please list {self.no_facts} interesting facts about this restaurant.
 
-            {self.text}
+            The text you need to list these facts from is in the below double quotes:
+
+            "{self.text}"
         """
         return prompt
     

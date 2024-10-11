@@ -1,0 +1,221 @@
+PROMPT 1
+
+    USER:
+        """
+            Please provide the restaurant name followed by {self.no_facts} facts about this restaurant
+
+            The name and facts need to be in the following format:
+
+            Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact
+
+            {self.text}
+        """
+
+Prompt 2
+
+    USER:
+        """
+            I am seeking your expertise in distilling key information about text.
+            Below I have given text that I have extracted from a certain restaurants website,
+            could you please list {self.no_facts} interesting facts about this restaurant.
+
+            You also need to provide the restaurant name.
+
+            The name and facts need to be in the following format:
+
+            Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact
+
+            Here is the text you need to list these facts from:
+
+            {self.text}
+        """
+
+Prompt 3
+    SYSTEM:
+        """
+            You are tasked with generating a list of facts from a lump of text about a restaurant.
+            These facts must be truthful and accurate and reflect the information given in the text.
+            These facts must also be interesting for a person viewing them.
+            Additionally, you must also list the restaurant's name by finding it in the text.
+
+            The name and facts need to be in the following format:
+
+            Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact
+        """
+
+    USER:
+        """
+            I am seeking your expertise in distilling key information about text.
+            Below I have given text that I have extracted from a certain restaurants website,
+            could you please list {self.no_facts} interesting facts about this restaurant.
+
+            Here is the text you need to list these facts from:
+
+            {self.text}
+        """
+
+PROMPT 4:
+    SYSTEM:
+        """
+            You are tasked with generating a list of facts from a lump of text about a restaurant.
+            These facts must be truthful and accurate and reflect the information given in the text.
+            These facts must also be interesting for a person viewing them.
+            Additionally, you must also list the restaurant's name by finding it in the text.
+
+            The name and facts need to be in the following format:
+
+            Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact
+
+            Below is an example of this format
+
+            Pacific Pines Tavern
+            Located in Pacific Pines, QLD, overlooking Central Park.
+            Family-friendly hotel with a motto that good food should be shared with good people.
+            Offers a spacious bistro known for delicious food, quality service, and comfortable seating. 
+            More facts
+        """
+    USER:
+        """
+            I am seeking your expertise in distilling key information about text.
+            Below I have given text that I have extracted from a certain restaurants website,
+            could you please list {self.no_facts} interesting facts about this restaurant.
+
+            Here is the text you need to list these facts from:
+
+            {self.text}
+        """
+
+PROMPT 5:
+    SYSTEM:
+        """
+            You are tasked with generating a list of facts from a lump of text about a restaurant.
+            These facts must be truthful and accurate and reflect the information given in the text.
+            These facts must also be interesting for a person viewing them.
+            Additionally, you must also list the restaurant's name by finding it in the text.
+
+            -------------------------------
+
+            The name and facts need to be in the following format shown inside the double quotes below:
+
+            "Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact"
+
+            -------------------------------
+
+            Below is an example of this format shown inside the double quotes
+
+            "Pacific Pines Tavern
+            Located in Pacific Pines, QLD, overlooking Central Park.
+            Family-friendly hotel with a motto that good food should be shared with good people.
+            Offers a spacious bistro known for delicious food, quality service, and comfortable seating. 
+            More fact"
+        """
+    USER:
+        """
+            I am seeking your expertise in distilling key information about text.
+            Below I have given text that I have extracted from a certain restaurants website,
+            could you please list {self.no_facts} interesting facts about this restaurant.
+
+            The text you need to list these facts from is in the below double quotes:
+
+            "{self.text}"
+        """
+
+PROMPT 6:
+    SYSTEM:
+        """
+            You are tasked with generating a list of facts from a lump of text about a restaurant.
+            These facts must be truthful and accurate and reflect the information given in the text.
+            These facts must also be interesting for a person viewing them.
+            Additionally, you must also list the restaurant's name by finding it in the text.
+            These facts must all be 20 words long.
+
+            -------------------------------
+
+            The name and facts need to be in the following format shown inside the double quotes below:
+
+            "Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact"
+
+            -------------------------------
+
+            Below is an example of this format shown inside the double quotes
+
+            "Pacific Pines Tavern
+            Located in Pacific Pines, QLD, overlooking Central Park.
+            Family-friendly hotel with a motto that good food should be shared with good people.
+            Offers a spacious bistro known for delicious food, quality service, and comfortable seating. 
+            More fact"
+        """
+    USER:
+        """
+            I am seeking your expertise in distilling key information about text.
+            Below I have given text that I have extracted from a certain restaurants website,
+            could you please list {self.no_facts} interesting facts about this restaurant.
+
+            The text you need to list these facts from is in the below double quotes:
+
+            "{self.text}"
+        """
+
+PROMPT 7:
+    SYSTEM:
+        """
+            You are tasked with generating a list of facts from a lump of text about a restaurant.
+            These facts must be truthful and accurate and reflect the information given in the text.
+            These facts must also be interesting and unique for a person viewing them and should be styled such
+            that they start with "Did you know? blah blah blah".
+            Additionally, you must also list the restaurant's name by finding it in the text.
+
+            -------------------------------
+
+            The name and facts need to be in the following format shown inside the double quotes below:
+
+            "Restaurant Name
+            Fact
+            Fact
+            ...
+            Fact"
+
+            -------------------------------
+
+            Below is an example of this format shown inside the double quotes
+
+            "Pacific Pines Tavern
+            Located in Pacific Pines, QLD, overlooking Central Park.
+            Family-friendly hotel with a motto that good food should be shared with good people.
+            Offers a spacious bistro known for delicious food, quality service, and comfortable seating. 
+            More fact"
+        """
+    USER:
+        """
+            I am seeking your expertise in distilling key information about text.
+            Below I have given text that I have extracted from a certain restaurants website,
+            could you please list {self.no_facts} interesting facts about this restaurant.
+
+            The text you need to list these facts from is in the below double quotes:
+
+            "{self.text}"
+        """

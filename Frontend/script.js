@@ -1,7 +1,7 @@
 let questions;
 
 (async function() {
-    // Need to get restaurant name and insert it instead of ThaiKorner
+    // Need to get restaurant name and insert it instead of hard coding
     await fetchData("ThaiKorner");
 
     console.log("You can now use these questions:", questions);

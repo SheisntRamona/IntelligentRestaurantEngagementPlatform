@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Full Restaurant Description</title>
+</head>
+<body>
+    <h1>Generate Restaurant Description</h1>
+    <form method="POST">
+        <label for="name">Restaurant Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br>
+
+        <label for="cuisine_type">Cuisine Type:</label>
+        <input type="text" id="cuisine_type" name="cuisine_type" required><br>
+
+        <label for="ambiance">Ambiance (optional):</label><br>
+        <textarea id="ambiance" name="ambiance" rows="3"></textarea><br>
+
+        <label for="special_features">Special Features (optional):</label><br>
+        <textarea id="special_features" name="special_features" rows="3"></textarea><br>
+
+        <input type="submit" value="Generate Description">
+    </form>
+</body>
+</html>

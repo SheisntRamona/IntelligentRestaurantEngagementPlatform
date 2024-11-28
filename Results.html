@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Result</title>
+</head>
+<body>
+    <h1>Your Generated Text</h1>
+    
+    {% if about_us %}
+        <h2>About Us</h2>
+        <p>{{ about_us }}</p>
+    {% endif %}
+
+    {% if description %}
+        <h2>Restaurant Description</h2>
+        <p>{{ description }}</p>
+    {% endif %}
+</body>
+</html>
